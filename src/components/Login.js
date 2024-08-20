@@ -9,22 +9,46 @@ const Login = () => {
     const { setJwtToken } = useOutletContext()
     const { setAlertClassName } = useOutletContext()
     const { setAlertMessage } = useOutletContext()
+    const { toggleRefresh } = useOutletContext()
 
     const navigate = useNavigate()
 
     const handleSubmit = (event) => {
         event.preventDefault()
         
-        if (email === "a@gmail.com") {
-            setJwtToken("aaa")
-            setAlertClassName("d-none")
-            setAlertMessage("")
-            navigate("/")
-        } else {
-            setAlertClassName("alert-danger")
-            setAlertMessage("Invalid login")
+        // build request payload
+        let payload = {
+            email: email,
+            password: password,
         }
-        console.log(email, password)
+
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify(payload)
+        }
+
+        fetch(`/authenticate`, requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.error) {
+                    setAlertClassName("alert-danger")
+                    setAlertMessage(data.message)
+                } else {
+                    setJwtToken(data.access_token)
+                    setAlertClassName("d-none")
+                    setAlertMessage("")
+                    toggleRefresh(true)
+                    navigate("/")
+                }
+            })
+            .catch(error => {
+                setAlertClassName("alert-danger")
+                setAlertMessage(error)
+            })
     } 
 
     return (
