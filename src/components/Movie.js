@@ -6,21 +6,45 @@ const Movie = () => {
     let { id } = useParams()
 
     useEffect(() => {
-        let myMovie = {
-            id: 1,
-            title: "Deadpool e Wolverine",
-            release_date: "2024-08-01",
-            runtime: 120,
-            mpaa_rating: "Adult",
-            description: "Description big"
+        const headers = new Headers()
+        headers.append("Content-Type", "application/json")
+
+        const requestOptions = {
+            method: "GET",
+            headers: headers
         }
-        setMovie(myMovie)
+
+        fetch(`/movies/${id}`, requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                setMovie(data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, [id])
+
+    if (movie.genres) {
+        movie.genres = Object.values(movie.genres)
+    } else {
+        movie.genres = []
+    }
+
     return (
         <div className="text-center">
             <h2>Movie: {movie.title}</h2>
-            <small><em>{movie.release_date}, {movie.runtime} minutes, Rated: {movie.mpaa_rating}</em></small>
+            <small><em>{movie.release_date}, {movie.runtime} minutes, Rated: {movie.mpaa_rating}</em></small> <br />
+            {movie.genres.map((g) => (
+                <span key={g.genre} className="badge bg-secondary me-2">{g.genre}</span>
+            ))}
             <hr />
+
+            {movie.image !== "" &&
+                <div className="mb-3">
+                    <img src={`http://image.tmdb.org/t/p/w200/${movie.image}`} alt="poster" />
+                </div>
+            }
+
             <p>{movie.description}</p>
         </div>
     )
