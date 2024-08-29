@@ -1,36 +1,36 @@
-import { useEffect, useState } from "react"
-import { Link, useNavigate, useOutletContext } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
 const ManageCatalogue = () => {
-    const [movies, setMovies] = useState([])
+    const [movies, setMovies] = useState([]);
 
-    const { jwtToken } = useOutletContext()
+    const { jwtToken } = useOutletContext();
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (jwtToken === "") {
-            navigate("/login")
-            return
+            navigate("/login");
+            return;
         }
-        const headers = new Headers()
-        headers.append("Content-Type", "application/json")
-        headers.append("Authorization", "Bearer " + jwtToken)
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        headers.append("Authorization", "Bearer " + jwtToken);
 
         const requestOptions = {
             method: "GET",
-            headers: headers,   
-        }
+            headers: headers,
+        };
 
         fetch(`/admin/movies`, requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                setMovies(data)
+                setMovies(data);
             })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [jwtToken, navigate])
+            .catch((err) => {
+                console.log(err);
+            });
+    }, [jwtToken, navigate]);
 
     return (
         <div>
@@ -48,9 +48,7 @@ const ManageCatalogue = () => {
                     {movies.map((m) => (
                         <tr key={m.id}>
                             <td>
-                                <Link to={`/admin/movies/${m.id}`}>
-                                    {m.title}
-                                </Link>
+                                <Link to={`/admin/movie/${m.id}`}>{m.title}</Link>
                             </td>
                             <td>{m.release_date}</td>
                             <td>{m.mpaa_rating}</td>
@@ -59,7 +57,7 @@ const ManageCatalogue = () => {
                 </tbody>
             </table>
         </div>
-    )
-}
+    );
+};
 
-export default ManageCatalogue
+export default ManageCatalogue;

@@ -5,16 +5,16 @@ const TextArea = (props) => {
                 {props.title}
             </label>
             <textarea
-            className="form-control"
-            id={props.name}
-            name={props.name}
-            value={props.value}
-            onChange={props.onChange}
-            rows={props.row}
+                className="form-control"
+                id={props.name}
+                name={props.name}
+                value={props.value}
+                onChange={props.onChange}
+                rows={props.row}
             />
             <div className={props.errorDiv}>{props.errorMsg}</div>
         </div>
-    )
-}
+    );
+};
 
-export default TextArea
+export default TextArea;

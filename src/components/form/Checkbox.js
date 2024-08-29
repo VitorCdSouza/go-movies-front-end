@@ -2,19 +2,19 @@ const Checkbox = (props) => {
     return (
         <div className="mb-3 form-check">
             <input
-            id={props.name}
-            className="form-check-input"
-            type="checkbox"
-            value={props.value}
-            name={props.name}
-            onChange={props.onChange}
-            checked={props.checked}
+                id={props.name}
+                className="form-check-input"
+                type="checkbox"
+                value={props.value}
+                name={props.name}
+                onChange={props.onChange}
+                checked={props.checked}
             />
             <label className="form-check-label" htmlFor={props.name}>
                 {props.title}
             </label>
         </div>
-    )
-}
+    );
+};
 
-export default Checkbox
+export default Checkbox;

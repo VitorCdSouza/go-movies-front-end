@@ -1,15 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './components/Home';
-import Movies from './components/Movies';
-import Movie from './components/Movie';
-import Genres from './components/Genres';
-import EditMovie from './components/EditMovie';
-import ManageCatalogue from './components/ManageCatalogue';
-import GraphQL from "./components/GraphQL"
-import Login from "./components/Login"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./components/Home";
+import Movies from "./components/Movies";
+import Movie from "./components/Movie";
+import Genres from "./components/Genres";
+import EditMovie from "./components/EditMovie";
+import ManageCatalogue from "./components/ManageCatalogue";
+import GraphQL from "./components/GraphQL";
+import Login from "./components/Login";
+import "./index.css"
 
 const router = createBrowserRouter([
   {
@@ -17,44 +18,44 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <App />,
     children: [
-      {index: true, element: <Home />},
+      { index: true, element: <Home /> },
       {
         path: "/movies",
-        element: <Movies />
+        element: <Movies />,
       },
       {
         path: "/movies/:id",
-        element: <Movie />
+        element: <Movie />,
       },
       {
         path: "/genres",
-        element: <Genres />
+        element: <Genres />,
       },
       {
         path: "/admin/movie/0",
-        element: <EditMovie />
+        element: <EditMovie />,
       },
       {
         path: "/admin/movie/:id",
-        element: <EditMovie />
+        element: <EditMovie />,
       },
       {
         path: "/manage-catalogue",
-        element: <ManageCatalogue />
+        element: <ManageCatalogue />,
       },
       {
         path: "/graphql",
-        element: <GraphQL />
+        element: <GraphQL />,
       },
       {
         path: "/login",
-        element: <Login />
+        element: <Login />,
       },
-    ]
-  }
-])
+    ],
+  },
+]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />

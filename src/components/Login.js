@@ -15,7 +15,7 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        
+
         // build request payload
         let payload = {
             email: email,
@@ -49,7 +49,7 @@ const Login = () => {
                 setAlertClassName("alert-danger")
                 setAlertMessage(error)
             })
-    } 
+    }
 
     return (
         <div className="col-md-6 offset-md-3">
@@ -57,30 +57,30 @@ const Login = () => {
             <hr />
 
             <form onSubmit={handleSubmit}>
-                <Input 
-                title="Email Address"
-                type="email"
-                className="form-control"
-                name="email"
-                autoComplete="email-new"
-                onChange={(event) => setEmail(event.target.value)}
+                <Input
+                    title="Email Address"
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    autoComplete="email-new"
+                    onChange={(event) => setEmail(event.target.value)}
                 />
 
-                <Input 
-                title="Password"
-                type="password"
-                className="form-control"
-                name="password"
-                autoComplete="password-new"
-                onChange={(event) => setPassword(event.target.value)}
+                <Input
+                    title="Password"
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    autoComplete="password-new"
+                    onChange={(event) => setPassword(event.target.value)}
                 />
 
                 <hr />
 
                 <input
-                type="submit"
-                className="btn btn-primary"
-                value="Login"
+                    type="submit"
+                    className="btn btn-primary"
+                    value="Login"
                 />
 
             </form>
